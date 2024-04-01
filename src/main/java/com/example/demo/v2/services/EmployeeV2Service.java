@@ -1,22 +1,21 @@
-package com.example.demo.services;
+package com.example.demo.v2.services;
 
 
-import com.example.demo.exceptions.EmployeeNotFoundException;
-import com.example.demo.model.Employee;
-import com.example.demo.model.EmployeeUpdateDTO;
+import com.example.demo.v2.exceptions.EmployeeNotFoundException;
+import com.example.demo.v2.model.Employee;
+import com.example.demo.v2.model.EmployeeUpdateDTO;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeService {
+public class EmployeeV2Service {
 
     private final List<Employee> employees;
 
-    public EmployeeService() {
+    public EmployeeV2Service() {
         employees = new ArrayList<>();
     }
 

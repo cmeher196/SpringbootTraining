@@ -1,65 +1,74 @@
-package com.example.demo.controllers;
+package com.example.demo.v2.controllers;
 
 
-import com.example.demo.exceptions.EmployeeNotFoundException;
-import com.example.demo.exceptions.ProductNotFoundException;
-import com.example.demo.model.Employee;
-import com.example.demo.model.EmployeeUpdateDTO;
-import com.example.demo.model.ExceptionDTO;
-import com.example.demo.services.EmployeeService;
+import com.example.demo.v2.exceptions.EmployeeNotFoundException;
+import com.example.demo.v2.exceptions.ProductNotFoundException;
+import com.example.demo.v2.model.Employee;
+import com.example.demo.v2.model.EmployeeUpdateDTO;
+import com.example.demo.v2.model.ExceptionDTO;
+import com.example.demo.v2.services.EmployeeV2Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1")
-public class EmployeeController {
+@RequestMapping("/api/v2")
+public class EmployeeV2Controller {
 
     //CRUD : create/Read/Update/Delete
 
-    private final EmployeeService employeeService;
+    private final EmployeeV2Service employeeV2Service;
 
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    Logger logger = LoggerFactory.getLogger(EmployeeV2Controller.class);
+
+    public EmployeeV2Controller(EmployeeV2Service employeeV2Service) {
+        this.employeeV2Service = employeeV2Service;
     }
 
     @GetMapping("/healthCheck") // localhost:8080/api/v1/employees/healthcheck
     public String healthCheck() {
-        return "Service is up and running!!";
+
+        logger.trace("A TRACE Message");
+        logger.debug("A DEBUG Message");
+        logger.info("An INFO Message");
+        logger.warn("A WARN Message");
+        logger.error("An ERROR Message");
+
+        return "V2 Service is up and running!!";
     }
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET) // get all Employees
     public ResponseEntity<List<Employee>> getEmployee() { // get all Employees
-        return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
+        return new ResponseEntity<>(employeeV2Service.getAllEmployees(), HttpStatus.OK);
     }
 
     @GetMapping("/employees/{id}") // we need to send response for single employee
     public ResponseEntity getEmployeeById(@PathVariable Long id)  throws EmployeeNotFoundException {
-        Employee employee = employeeService.getEmployeeById(id);
+        Employee employee = employeeV2Service.getEmployeeById(id);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
     @PostMapping()
     public ResponseEntity<String> addEmployee(@RequestBody Employee employee) {
-        Employee employeResponse = employeeService.addEmployee(employee);
+        Employee employeResponse = employeeV2Service.addEmployee(employee);
         return new ResponseEntity<>(employeResponse.getName(), HttpStatus.CREATED);
     }
 
     @PutMapping("/employees") // update an employee
     public ResponseEntity<Employee> updateEmployee(@RequestBody EmployeeUpdateDTO updateDTO) { // update an employee
-        return new ResponseEntity<>(employeeService.updateEmployee(updateDTO), HttpStatus.OK); //200
+        return new ResponseEntity<>(employeeV2Service.updateEmployee(updateDTO), HttpStatus.OK); //200
     }
 
     @DeleteMapping("/{id}") // delete an employee
     public ResponseEntity<String> deleteEmployee(@PathVariable Long id) throws EmployeeNotFoundException {
-        if (employeeService.getEmployeeById(id) == null)
+        if (employeeV2Service.getEmployeeById(id) == null)
             return new ResponseEntity<>("Employee not found!!", HttpStatus.NOT_FOUND);
         else {
-            Employee employeeResponse = employeeService.deleteEmployee(id);
+            Employee employeeResponse = employeeV2Service.deleteEmployee(id);
             return new ResponseEntity<>("Deleted Employee is " + employeeResponse.getName(), HttpStatus.OK);
         }
     }

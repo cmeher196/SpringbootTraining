@@ -1,9 +1,7 @@
-package com.example.demo.dto;
+package com.example.demo.v1.dto;
 
-import com.example.demo.model.Employee;
+import com.example.demo.v1.model.Employee;
 import lombok.Setter;
-
-import java.util.List;
 
 @Setter
 public class ResponseDTO {

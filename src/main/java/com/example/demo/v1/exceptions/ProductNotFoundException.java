@@ -1,4 +1,4 @@
-package com.example.demo.exceptions;
+package com.example.demo.v1.exceptions;
 
 public class ProductNotFoundException extends Exception{
 
