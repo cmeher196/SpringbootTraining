@@ -7,6 +7,7 @@ import com.example.demo.v1.model.Employee;
 import com.example.demo.v1.model.EmployeeUpdateDTO;
 import com.example.demo.v1.model.ExceptionDTO;
 import com.example.demo.v1.services.EmployeeService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -17,13 +18,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
+@Slf4j
 public class EmployeeController {
 
     //CRUD : create/Read/Update/Delete
 
     private final EmployeeService employeeService;
 
-    Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+//    Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
@@ -32,11 +34,12 @@ public class EmployeeController {
     @GetMapping("/healthCheck") // localhost:8080/api/v1/employees/healthcheck
     public String healthCheck() {
 
-        logger.trace("A TRACE Message");
-        logger.debug("A DEBUG Message");
-        logger.info("An INFO Message");
-        logger.warn("A WARN Message");
-        logger.error("An ERROR Message");
+        log.trace("A TRACE Message");
+        log.debug("A DEBUG Message");
+        log.info("An INFO Message");
+        log.warn("A WARN Message");
+        log.error("An ERROR Message");
+
 
         return "V1 Service is up and running!!";
     }
@@ -73,19 +76,7 @@ public class EmployeeController {
         }
     }
 
-    @ExceptionHandler(EmployeeNotFoundException.class)
-    public ResponseEntity<String> employeeNotFoundExpection(EmployeeNotFoundException ex){
-        ExceptionDTO exceptionDTO = new ExceptionDTO(
-                ex.getMessage(),
-                HttpStatus.NOT_FOUND
-        );
-        return new ResponseEntity<>(exceptionDTO.getMessage(), exceptionDTO.getHttpStatus());
-    }
 
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<String> productNotFoundExpection(EmployeeNotFoundException ex){
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-    }
 }
 
 

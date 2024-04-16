@@ -1,8 +1,12 @@
 package com.example.demo.v1.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
+//@Data
 @Data
 public class Employee {
 
@@ -18,4 +22,7 @@ public class Employee {
         String address;
 
 
+
 }
+
+

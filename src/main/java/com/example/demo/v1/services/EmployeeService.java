@@ -4,6 +4,7 @@ package com.example.demo.v1.services;
 import com.example.demo.v1.exceptions.EmployeeNotFoundException;
 import com.example.demo.v1.model.Employee;
 import com.example.demo.v1.model.EmployeeUpdateDTO;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class EmployeeService {
         return employee;
     }
 
+    @Profile("debug")
     public Employee updateEmployee(EmployeeUpdateDTO updateDTO) {
         Employee employee = new Employee();
         if(updateDTO != null) {
