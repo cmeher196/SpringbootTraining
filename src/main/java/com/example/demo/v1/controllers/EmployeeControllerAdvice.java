@@ -3,7 +3,7 @@ package com.example.demo.v1.controllers;
 
 import com.example.demo.v1.exceptions.EmployeeNotFoundException;
 import com.example.demo.v1.exceptions.ProductNotFoundException;
-import com.example.demo.v1.model.ExceptionDTO;
+import com.example.demo.v1.dto.ExceptionDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

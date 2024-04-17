@@ -2,14 +2,10 @@ package com.example.demo.v1.controllers;
 
 
 import com.example.demo.v1.exceptions.EmployeeNotFoundException;
-import com.example.demo.v1.exceptions.ProductNotFoundException;
 import com.example.demo.v1.model.Employee;
-import com.example.demo.v1.model.EmployeeUpdateDTO;
-import com.example.demo.v1.model.ExceptionDTO;
+import com.example.demo.v1.dto.EmployeeUpdateDTO;
 import com.example.demo.v1.services.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
